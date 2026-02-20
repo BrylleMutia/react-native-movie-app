@@ -1,3 +1,4 @@
+import MovieCard from "@/components/MovieCard";
 import SearchBar from "@/components/SearchBar";
 import { icons } from "@/constants/icons";
 import { images } from "@/constants/images";
@@ -49,7 +50,7 @@ export default function App() {
                      placeholder="Search"
                   />
                   <SafeAreaView style={{flex: 1}}>
-                    < <FlatList
+                    <FlatList
                         data={movies}
                         ListHeaderComponent={
                            <Text className="text-lg text-white font-bold mt-5 mb-3">
@@ -57,9 +58,7 @@ export default function App() {
                            </Text>
                         }
                         renderItem={({ item }) => (
-                           <Text className="text-white text-sm">
-                              {item.title}
-                           </Text>
+                           <MovieCard {...item} />
                         )}
                         keyExtractor={(item) => item.id.toString()}
                         numColumns={3}
@@ -70,7 +69,7 @@ export default function App() {
                            marginBottom: 10 
                         }}
                         className="mt-2 pb-32"
-                     />>
+                     />
                   </SafeAreaView>
                </View>
             )}
