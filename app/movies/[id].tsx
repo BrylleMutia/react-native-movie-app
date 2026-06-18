@@ -1,10 +1,33 @@
+import { fetchMovieDetails } from "@/services/api";
+import useFetch from "@/services/useFetch";
+import { useLocalSearchParams } from "expo-router";
 import React from "react";
-import { Text, View } from "react-native";
+import { Image, ScrollView, View } from "react-native";
 
 const MovieDetails = () => {
+   const { id } = useLocalSearchParams();
+
+   const {
+      data: movie,
+      loading,
+      error,
+   } = useFetch(() => fetchMovieDetails(id as string), !!id);
+
+   console.log(movie);
+
    return (
-      <View>
-         <Text>MovieDetails</Text>
+      <View className="bg-primary flex-1">
+         <ScrollView contentContainerStyle={{ paddingBottom: 80 }}>
+            <View>
+               <Image
+                  source={{
+                     uri: `https://image.tmdb.org/t/p/w500${movie?.poster_path}`,
+                  }}
+                  className="w-full h-[550px]"
+                  resizeMode="stretch"
+               />
+            </View>
+         </ScrollView>
       </View>
    );
 };
